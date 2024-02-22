@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<!--Заголовок и начальная инициализация web-интерфейса-->
+	<meta charset="utf-8">
+	<link href="img/restart.png" rel="shortcut icon" type="image/x-icon" />
+	<!--link rel="stylesheet" type="text/css" href="css/graph.css" /-->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<title>Перезагрузка приборов ком. учета</title>
+</head>
+
+<body>
+<script>
+function timshow(chanval, timeout){
+	return timeout-1;
+	$('div#do_'+chanval).text(timeout);
+}
+function showButton(chanval){
+	/*$.ajax({
+		url: "http://_/setParam.cgi?DOStatus_"+chanval+"=0",
+		cache: false
+	});*/
+	$('button#btn_do_'+chanval).css('display', 'inline');
+};
+function show_time(chanval){
+	/*$.ajax({
+		url: "http://_/setParam.cgi?DOStatus_"+chanval+"=1",
+		cache: false
+	});*/
+	$('button#btn_do_'+chanval).css('display', 'none');
+	setTimeout(showButton, 15000, chanval);
+	timeout=15;
+	setInterval(timshow, 1000, chanval);
+}
+</script>
+<center>
+	<h1>Перезагрузка приборов коммерческого учета</h1>
+</center>
+	<br>
+	<ul>
+	<li>Включение - DO_07 -> <div id="do_07"><button id="btn_do_07" title="Перезагружает канал - DO_01" onclick="show_time('07')"><img src="img/reset.png" alt="---" style="vertical-align: middle"></button></div></li>
+	<br>
+	<li><a href="about.php">О PHP</a></li>
+	<br>
+	</ul>
+	<hr>
+</body>
+
+</html>
